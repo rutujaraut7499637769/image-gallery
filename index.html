@@ -123,7 +123,11 @@
                 description:   "The rabbit is a small mammals that is known for its long ears, soft fur, and quick movements. They are often found in forests and grasslands, and are important to many cultures for their meat and fur."
             }
         ]
-       
+        let currentIndex = 1;
+        function showCurrentIndexImage() {
+            const imgElement = document.getElementById("mainImage");
+            const headerElement = document.getElementById("title");
+            const descriptionElement = document.getElementById("description");
 
             const currentImage = IMAGES[currentIndex];
 
