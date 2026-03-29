@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Image Gallery</title>
+    <style>
+        .main-img {
+
+
+            width: 300px;
+            height: 350px;
+            border-radius: 10px;
+        }
+
+        .gallery-container {
+            width: fit-content;
+            margin: 10px auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-slide {
+            display: flex;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            cursor: pointer;
+            border: 1px solid black;
+            margin: 5px;
+        }
+
+        .preview-img {
+            height: 100px;
+            width: 100px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .gallery-preview {
+            display: flex;
+            overflow-x: scroll;
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        #title {
+            text-align: center;
+        }
+
+        #description {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center; color:green"> 🐾 Animal Gallery</h1>
+    <div class="gallery-container">
+        <span class="btn-slide btn-left" onclick="slideLeft()">&lt;</span>
+        <img src="1.jpg" alt="image1" class="main-img" id="mainImage">
+        <span class=" btn-slide btn-right" onclick="slideRight()">&gt;</span>
+    </div>
+    <h3 id="title">"Cat"</h3>
+    <p id="description">The cat is a small carnivorous mammal that is often kept as a pet. They are known for their agility, independence, and playful nature.
+    </p>
+    <div class="gallery-preview" id="gallery-preview">
+
+    </div>
+    <script>
+        const IMAGES = [
+            {
+                url: "1.jpg",
+                title: "cat",
+                description: "The cat is a small carnivorous mammal that is often kept as a pet. They are known for their agility, independence, and playful nature."
+            },
+            {
+                url: "2.jpg",
+                title: "buffalo",
+                description:"The buffalo is a large, heavyset mammal that is known for its strength and distinctive appearance. They are often found in grasslands and are important to many cultures for their meat, hide, and other products."
+            },
+            {
+                url: "3.jpg",
+                title: "cow",
+                description: "The cow is a domesticated mammal that is commonly raised for its meat, milk, and hide. They are known for their docile nature and are often kept in agricultural settings."
+            },
+            {
+                url: "4.jpg",
+                title: "tiger",
+                description: "The tiger is a large, carnivorous mammal that is known for its distinctive orange and black stripes. They are often found in forests and grasslands, and are important to many cultures for their beauty and strength."
+            },
+            {
+                url: "5.jpg",
+                title: "dog",
+                description: "The dog is a domesticated carnivorous mammal that is often kept as a pet. They are known for their loyalty, companionship, and diverse breeds."
+            },
+            {
+                url: "6.jpg",
+                title: "elephant",
+                description: "The elephant is a large, heavyset mammal that is known for its intelligence, strength, and distinctive appearance. They are often found in savannas and forests, and are important to many cultures for their ivory and other products."
+            },
+            {
+                url: "7.jpg",
+                title: "fox",
+                description: "The fox is a small to medium-sized carnivorous mammal that is known for its bushy tail and distinctive appearance. They are often found in forests and grasslands, and are important to many cultures for their fur and as a symbol of cunning."
+            },
+            {
+                url: "8.jpg",
+                title: "goat",
+                description: "The goat is a domesticated mammal that is commonly raised for its meat, milk, and hide. They are known for their agility and are often kept in mountainous regions."
+            },
+            {
+                url: "9.jpg",
+                title: "monkey",
+                description:   "Monkey is an intelligent and playful wild animal found in forests and trees. It has a long tail, strong limbs, and can climb trees very quickly. Monkeys are omnivores, so they eat fruits, leaves, insects, and small animals."
+            },
+            {
+                url: "10.jpg",
+                title: "rabbit",
+                description:   "The rabbit is a small mammals that is known for its long ears, soft fur, and quick movements. They are often found in forests and grasslands, and are important to many cultures for their meat and fur."
+            }
+        ]
+        let currentIndex = 1;
+        function showCurrentIndexImage() {
+            const imgElement = document.getElementById("mainImage");
+            const headerElement = document.getElementById("title");
+            const descriptionElement = document.getElementById("description");
+
+            const currentImage = IMAGES[currentIndex];
+
+            imgElement.src = currentImage.url;
+            headerElement.innerText = currentImage.title;
+            descriptionElement.innerText = currentImage.description;
+        }
+        function slideLeft() {
+            if (currentIndex > 0) {
+                currentIndex--;
+            }
+            else {
+                currentIndex = IMAGES.length - 1;
+            }
+            showCurrentIndexImage();
+        }
+        function slideRight() {
+            if (currentIndex < IMAGES.length - 1) {
+                currentIndex++;
+            }
+            else {
+                currentIndex = 0;
+            }
+            showCurrentIndexImage();
+        }
+        function showImage(index) {
+            currentIndex = index;
+            showCurrentIndexImage();
+        }
+        function createGalleryPreview() {
+            const galleryPreviewContainer = document.getElementById("gallery-preview");
+            galleryPreviewContainer.innerHTML = "";
+            for (let i = 0; i < IMAGES.length; i++) {
+                const currentImage = IMAGES[i];
+                galleryPreviewContainer.innerHTML += `<img src='${currentImage.url}' class='preview-img'
+                onclick='showImage(${i})'/>`;
+            }
+        }
+        createGalleryPreview();
+
+    </script>
+</body>
+</html>
